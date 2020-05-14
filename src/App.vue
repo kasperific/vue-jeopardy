@@ -1,6 +1,10 @@
 <template>
   <div id="app">
     <ClueBox />
+    <ClueBox />
+    <ClueBox />
+    <ClueBox />
+    <ClueBox />
   </div>
 </template>
 
@@ -16,6 +20,9 @@ export default {
 </script>
 
 <style>
+[v-cloak] {
+        display: none;
+    }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
