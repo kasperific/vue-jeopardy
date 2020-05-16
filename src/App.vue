@@ -5,6 +5,7 @@
     <ClueBox />
     <ClueBox />
     <ClueBox />
+    <ClueBox />
   </div>
 </template>
 
