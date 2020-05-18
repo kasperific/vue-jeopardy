@@ -6,6 +6,7 @@
   <section v-else> -->
   <section v-cloak>
     <h1>{{ categories.title }}</h1>
+
     <div class="box" v-for="clue in uniqueClues" :key="clue.id">
       <p >
         {{ clue.value }}
@@ -13,7 +14,7 @@
       <p @click="showAnswer(clue)">
         {{ clue.question }}
       </p>
-      <div v-if="clue.questionAnswered">
+      <div v-if="clue.answerVisible === true">
         <p v-cloak @click="hideAnswer(clue)">
           {{ clue.answer }}
         </p>
@@ -29,15 +30,13 @@ export default {
   name: 'ClueBox',
   data () {
     return {
-      categories: [],
-      questionAnswered: false
+      categories: []
     }
   },
   computed: {
     uniqueClues: function () {
-      var self = this
       // The date of clue value increase due to inflation was Nov 26, 2001. All clue values before that should be doubled.
-      self.categories.clues.map(function (clue) {
+      this.categories.clues.map(function (clue) {
         var increaseDate = new Date('2001-11-26T12:00:00.000Z')
         var airdate = new Date(clue.airdate)
         if (airdate < increaseDate) {
@@ -48,7 +47,7 @@ export default {
       })
       // remove duplicate values
       var uClues =
-       self.categories.clues.reduce((acc, current) => {
+       this.categories.clues.reduce((acc, current) => {
          const x = acc.find(item => item.value === current.value)
          if (!x) {
            return acc.concat([current])
@@ -67,8 +66,9 @@ export default {
       var sortedClues =
             filteredClues
               .sort((a, b) => a.value - b.value)
-
-      return sortedClues
+      var addVisible =
+            sortedClues.map(item => ({ ...item, answerVisible: false }))
+      return addVisible
     }
   },
   created () {
@@ -95,10 +95,12 @@ export default {
       // .finally(() => this.loading = false)
     },
     showAnswer (clue) {
-      clue.questionAnswered = true
+      clue.answerVisible = true
+      this.$forceUpdate()
     },
     hideAnswer (clue) {
-      clue.questionAnswered = false
+      clue.answerVisible = false
+      this.$forceUpdate()
     }
   }
 }
