@@ -5,20 +5,25 @@
 
   <section v-else> -->
   <section v-cloak>
-    <h1>{{ categories.title }}</h1>
+    <h1 class="clue">{{ categories.title }}</h1>
 
-    <div class="box" v-for="clue in uniqueClues" :key="clue.id">
-      <p >
-        {{ clue.value }}
-      </p>
-      <p @click="showAnswer(clue)">
-        {{ clue.question }}
-      </p>
-      <div v-if="clue.answerVisible === true">
-        <p v-cloak @click="hideAnswer(clue)">
+    <div class="clue" v-for="clue in uniqueClues" :key="clue.id">
+      <div class="clue-value" @click="showQuestion(clue)" v-if="clue.questionVisible === false">
+        <p>
+          ${{ clue.value }}
+        </p>
+      </div>
+      <div class="clue-value" @click="showAnswer(clue)" v-if="clue.questionVisible === true && clue.answerVisible === false">
+        <p class="clue-content" >
+          {{ clue.question }}
+        </p>
+      </div>
+      <div class="clue-content" v-if="clue.answerVisible === true && clue.nothingVisible === false">
+        <p v-cloak @click="hideEverything(clue)">
           {{ clue.answer }}
         </p>
       </div>
+      <div class="clue-content" v-if="clue.nothingVisible === true"></div>
     </div>
 
   </section>
@@ -67,7 +72,7 @@ export default {
             filteredClues
               .sort((a, b) => a.value - b.value)
       var addVisible =
-            sortedClues.map(item => ({ ...item, answerVisible: false }))
+            sortedClues.map(item => ({ ...item, answerVisible: false, questionVisible: false, nothingVisible: false }))
       return addVisible
     }
   },
@@ -101,6 +106,18 @@ export default {
     hideAnswer (clue) {
       clue.answerVisible = false
       this.$forceUpdate()
+    },
+    showQuestion (clue) {
+      clue.questionVisible = true
+      this.$forceUpdate()
+    },
+    hideQuestion (clue) {
+      clue.questionVisible = false
+      this.$forceUpdate()
+    },
+    hideEverything (clue) {
+      clue.nothingVisible = true
+      this.$forceUpdate()
     }
   }
 }
@@ -108,18 +125,37 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
+h1 {
+  font-family: Helvetica, sans-serif;
+  text-transform: uppercase;
+  background: blue;
+  margin: 0;
+  margin-bottom: 10px;
+  padding: 1rem;
+  text-shadow: 2px 2px 1px rgb(3, 3, 3);
 }
-ul {
-  list-style-type: none;
-  padding: 0;
+section {
+  display: grid;
+  grid-template-rows: repeat(6, 1fr);
+  grid-row-gap: 5px;
+  background: black;
 }
-li {
-  display: inline-block;
-  margin: 0 10px;
+.clue {
+  background: blue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-a {
-  color: #42b983;
+.clue-value {
+  font-weight: 900;
+  color: yellow;
+  font-size: 3rem;
+  text-shadow: 3px 3px 2px rgb(3, 3, 3);
+}
+.clue-content {
+  font-family: 'Libre Baskerville', serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-shadow: 3px 3px 2px rgb(3, 3, 3);
 }
 </style>
