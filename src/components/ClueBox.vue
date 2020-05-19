@@ -8,31 +8,41 @@
     <h1 class="clue">{{ categories.title }}</h1>
 
     <div class="clue" v-for="clue in uniqueClues" :key="clue.id">
-      <div class="clue-value" @click="showQuestion(clue)" v-if="clue.questionVisible === false">
+
+        <div class="clue-value" v-if="clue.nothingVisible === false" @click="showModal(clue)">
         <p>
           ${{ clue.value }}
         </p>
       </div>
-      <div class="clue-value" @click="showAnswer(clue)" v-if="clue.questionVisible === true && clue.answerVisible === false">
-        <p class="clue-content" >
-          {{ clue.question }}
-        </p>
-      </div>
-      <div class="clue-content" v-if="clue.answerVisible === true && clue.nothingVisible === false">
-        <p v-cloak @click="hideEverything(clue)">
-          {{ clue.answer }}
-        </p>
-      </div>
+      <modal v-show="clue.isModalVisible" @close="closeModal">
+        <div class="clue-content" @click="showAnswer(clue)" v-if="clue.questionVisible === true && clue.answerVisible === false">
+          <p class="clue-content">
+            {{ clue.question }}
+          </p>
+        </div>
+        <div class="clue-content" v-if="clue.answerVisible === true && clue.nothingVisible === false" @click="closeModal(clue)">
+          <p v-cloak>
+            {{ clue.answer }}
+          </p>
+        </div>
+      </modal>
+
       <div class="clue-content" v-if="clue.nothingVisible === true"></div>
     </div>
 
   </section>
+
 </template>
 
 <script>
 import axios from 'axios'
+import Modal from './Modal.vue'
+
 export default {
   name: 'ClueBox',
+  components: {
+    Modal
+  },
   data () {
     return {
       categories: []
@@ -72,7 +82,7 @@ export default {
             filteredClues
               .sort((a, b) => a.value - b.value)
       var addVisible =
-            sortedClues.map(item => ({ ...item, answerVisible: false, questionVisible: false, nothingVisible: false }))
+            sortedClues.map(item => ({ ...item, answerVisible: false, questionVisible: false, nothingVisible: false, isModalVisible: false }))
       return addVisible
     }
   },
@@ -103,19 +113,13 @@ export default {
       clue.answerVisible = true
       this.$forceUpdate()
     },
-    hideAnswer (clue) {
-      clue.answerVisible = false
-      this.$forceUpdate()
-    },
-    showQuestion (clue) {
+    showModal (clue) {
+      clue.isModalVisible = true
       clue.questionVisible = true
       this.$forceUpdate()
     },
-    hideQuestion (clue) {
-      clue.questionVisible = false
-      this.$forceUpdate()
-    },
-    hideEverything (clue) {
+    closeModal (clue) {
+      clue.isModalVisible = false
       clue.nothingVisible = true
       this.$forceUpdate()
     }
@@ -126,9 +130,8 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 h1 {
-  font-family: Helvetica, sans-serif;
   text-transform: uppercase;
-  background: blue;
+  background: #031174;
   margin: 0;
   margin-bottom: 10px;
   padding: 1rem;
@@ -141,21 +144,25 @@ section {
   background: black;
 }
 .clue {
-  background: blue;
+  background: #031174;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 .clue-value {
   font-weight: 900;
-  color: yellow;
+  color: #d69f4c;
   font-size: 3rem;
-  text-shadow: 3px 3px 2px rgb(3, 3, 3);
+  text-shadow: 7px 7px 2px rgb(3, 3, 3);
+  cursor: pointer;
 }
 .clue-content {
   font-family: 'Libre Baskerville', serif;
   font-weight: 700;
+  font-size: 4rem;
   text-transform: uppercase;
   text-shadow: 3px 3px 2px rgb(3, 3, 3);
+  cursor: pointer;
 }
 </style>
