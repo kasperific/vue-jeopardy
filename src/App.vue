@@ -1,29 +1,29 @@
 <template>
   <div id="app">
-    <ClueBox />
-    <ClueBox />
-    <ClueBox />
-    <ClueBox />
-    <ClueBox />
-    <ClueBox />
+    <CategoryBox />
+    <CategoryBox />
+    <CategoryBox />
+    <CategoryBox />
+    <CategoryBox />
+    <CategoryBox />
   </div>
 </template>
 
 <script>
-import ClueBox from './components/ClueBox.vue'
+import CategoryBox from '@/components/CategoryBox'
 
 export default {
   name: 'App',
   components: {
-    ClueBox
+    CategoryBox
   }
 }
 </script>
 
 <style>
 [v-cloak] {
-        display: none;
-    }
+  display: none;
+}
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
