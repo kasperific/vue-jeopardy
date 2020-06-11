@@ -1,29 +1,7 @@
-# jeopardy
+# Virtual Jeopardy!
 
-## Project setup
-```
-npm install
-```
+Populated using the jService REST API - http://jservice.io/, a database of every Jeopardy clue since it's first episode.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+Click on a dollar value to view a clue. Click on the clue to view the answer. Click on the answer to get back to the board.
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your unit tests
-```
-npm run test:unit
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Coming soon: score keeping, user authentication.
