@@ -25,6 +25,8 @@
 </template>
 
 <script>
+import { database } from 'firebase'
+
 import Modal from '@/components/Modal'
 
 export default {
@@ -33,9 +35,13 @@ export default {
     Modal
   },
   props: [
-    'clue'
+    'clue',
+    'gameId',
+    'user'
   ],
-
+  data: () => ({
+    game: null
+  }),
   methods: {
     showAnswer (clue) {
       clue.answerVisible = true
