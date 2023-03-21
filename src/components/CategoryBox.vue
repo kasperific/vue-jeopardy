@@ -68,10 +68,10 @@ export default {
   methods: {
     getCategories () {
       var self = this
-      // category id's range from 1 to 18418
-      var randomId = Math.round(Math.random() * 18418)
+      // category id's range from 1 to 28163
+      var randomId = Math.round(Math.random() * 28163)
       // todo: to get new clues, increment top # by 1 each week when new episodes air (btw start and end dates of new broadcasts)
-      const url = 'https://jservice.io//api/category.json'
+      const url = 'https://jservice.io/api/category.json'
       axios
         .get(url + '?id=' + randomId)
         .then(response => (self.categories = response.data))
