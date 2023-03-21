@@ -11,22 +11,20 @@
 
 <script>
 import axios from 'axios'
-import ClueBox from '@/components/ClueBox'
+import ClueBox from './ClueBox.vue'
 export default {
   name: 'CategoryBox',
   components: {
     ClueBox
   },
-  data () {
-    return {
+  data: () => ({
       clue: {},
       categories: []
-    }
-  },
+  }),
   computed: {
     uniqueClues: function () {
       // The date of clue value increase due to inflation was Nov 26, 2001. All clue values before that should be doubled.
-      this.categories.clues.map(function (clue) {
+      this.categories?.clues?.map(function (clue) {
         var increaseDate = new Date('2001-11-26T12:00:00.000Z')
         var airdate = new Date(clue.airdate)
         if (airdate < increaseDate) {
@@ -37,7 +35,7 @@ export default {
       })
       // remove duplicate values
       var uClues =
-       this.categories.clues.reduce((acc, current) => {
+       this.categories?.clues?.reduce((acc, current) => {
          const x = acc.find(item => item.value === current.value)
          if (!x) {
            return acc.concat([current])
@@ -47,17 +45,15 @@ export default {
        }, [])
        // remove clues with empty or invalid values
       var filteredClues =
-            uClues
-              .filter(item => item.value !== null)
+            uClues?.filter(item => item.value !== null)
               .filter(item => item.value !== 0)
               .filter(item => item.question !== '')
               .filter(item => item.invalid_count !== 1)
       // sort by value, least to highest
       var sortedClues =
-            filteredClues
-              .sort((a, b) => a.value - b.value)
+            filteredClues?.sort((a, b) => a.value - b.value)
       var addVisible =
-            sortedClues.map(item => ({ ...item, answerVisible: false, questionVisible: false, nothingVisible: false, isModalVisible: false }))
+            sortedClues?.map(item => ({ ...item, answerVisible: false, questionVisible: false, nothingVisible: false, isModalVisible: false }))
       return addVisible
     }
   },

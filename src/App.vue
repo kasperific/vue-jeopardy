@@ -1,24 +1,22 @@
-<template>
-  <div id="app">
-    <CategoryBox />
-    <CategoryBox />
-    <CategoryBox />
-    <CategoryBox />
-    <CategoryBox />
-    <CategoryBox />
-  </div>
-</template>
-
-<script>
-import CategoryBox from '@/components/CategoryBox'
-
+<script >
+import CategoryBox from './components/CategoryBox.vue'
 export default {
-  name: 'App',
   components: {
     CategoryBox
   }
 }
 </script>
+
+<template>
+    <CategoryBox />
+    <CategoryBox />
+    <CategoryBox />
+    <CategoryBox />
+    <CategoryBox />
+    <CategoryBox />
+</template>
+
+
 
 <style>
 [v-cloak] {

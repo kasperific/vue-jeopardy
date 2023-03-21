@@ -7,10 +7,11 @@
         </p>
       </div>
       <modal v-show="clue.isModalVisible" @close="closeModal">
-        <div class="clue-content" @click="showAnswer(clue)" v-if="clue.questionVisible === true && clue.answerVisible === false">
+        <div class="clue-content" v-if="clue.questionVisible === true && clue.answerVisible === false">
           <p class="clue-content">
             {{ clue.question }}
           </p>
+          <a @click="showAnswer(clue)">Reveal answer</a>
         </div>
         <div class="clue-content" v-if="clue.answerVisible === true && clue.nothingVisible === false" @click="closeModal(clue)">
           <p v-cloak>
@@ -25,7 +26,7 @@
 </template>
 
 <script>
-import Modal from '@/components/Modal'
+import Modal from './Modal.vue'
 
 export default {
   name: 'ClueBox',
