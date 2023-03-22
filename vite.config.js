@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import createVuePlugin from '@vitejs/plugin-vue'
+import pluginRewriteAll from 'vite-plugin-rewrite-all';
 
 export default defineConfig({
   resolve: {
@@ -16,8 +17,8 @@ export default defineConfig({
           }
         }
       }
-    })
-  ],
+    }),
+    pluginRewriteAll()],
   server: {
     watch: {
       usePolling: true,
