@@ -23,6 +23,15 @@ export default {
   display: none;
 }
 
+@font-face {
+  font-family: 'ITC Korinna';
+  src: url('./assets/itc-korinna-bold.otf') format('opentype')
+}
+
+body {
+  margin: 0;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

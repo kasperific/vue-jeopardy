@@ -8,15 +8,12 @@
       </div>
       <modal v-show="clue.isModalVisible" @close="closeModal">
         <div class="clue-content" v-if="clue.questionVisible === true && clue.answerVisible === false">
-          <p class="clue-content">
-            {{ clue.question }}
-          </p>
-          <a @click="showAnswer(clue)">Reveal answer</a>
+          <p class="clue-content" v-html="clue.question"></p>
+          <button @click="showAnswer(clue)">Reveal answer</button>
         </div>
-        <div class="clue-content" v-if="clue.answerVisible === true && clue.nothingVisible === false" @click="closeModal(clue)">
-          <p v-cloak>
-            {{ clue.answer }}
-          </p>
+        <div class="clue-content" v-if="clue.answerVisible === true && clue.nothingVisible === false">
+          <p v-cloak v-html="clue.answer"></p>
+          <button @click="closeModal(clue)">Return to board</button>
         </div>
       </modal>
 
@@ -72,11 +69,11 @@ export default {
   cursor: pointer;
 }
 .clue-content {
-  font-family: 'Libre Baskerville', serif;
+  font-family: 'ITC Korinna', serif;
   font-weight: 700;
   font-size: 4rem;
   text-transform: uppercase;
+  letter-spacing: .05em;
   text-shadow: 3px 3px 2px rgb(3, 3, 3);
-  cursor: pointer;
 }
 </style>
