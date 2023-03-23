@@ -60,6 +60,7 @@ export default {
   justify-content: center;
   align-items: center;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  height: 100%;
 }
 .clue-value {
   font-weight: 900;

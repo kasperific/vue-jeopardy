@@ -28,8 +28,12 @@ export default {
   src: url('./assets/itc-korinna-bold.otf') format('opentype')
 }
 
-body {
+body,p {
   margin: 0;
+}
+
+html, body, #app {
+  min-height: 100vh;
 }
 
 #app {
