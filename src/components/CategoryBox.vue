@@ -89,7 +89,7 @@ section {
   background: black;
 }
 h1 {
-  background: #101584;
+  background: #004aaa;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -101,6 +101,6 @@ h1 {
   text-shadow: 2px 2px 1px rgb(3, 3, 3);
 }
 .clue {
-  background: #101584;
+  background: #004aaa;
 }
 </style>

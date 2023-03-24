@@ -9,11 +9,11 @@
       <modal v-show="clue.isModalVisible" @close="closeModal">
         <div class="clue-content" v-if="clue.questionVisible === true && clue.answerVisible === false">
           <p class="clue-content" v-html="clue.question"></p>
-          <button @click="showAnswer(clue)">Reveal answer</button>
+          <Button @wasClicked="showAnswer(clue)">Reveal answer</Button>
         </div>
         <div class="clue-content" v-if="clue.answerVisible === true && clue.nothingVisible === false">
           <p v-cloak v-html="clue.answer"></p>
-          <button @click="closeModal(clue)">Return to board</button>
+          <Button @wasClicked="closeModal(clue)">Return to board</Button>
         </div>
       </modal>
 
@@ -24,11 +24,13 @@
 
 <script>
 import Modal from './Modal.vue'
+import Button from './Button.vue'
 
 export default {
   name: 'ClueBox',
   components: {
-    Modal
+    Modal, 
+    Button
   },
   props: [
     'clue'
@@ -66,15 +68,14 @@ export default {
   font-weight: 900;
   color: #d69f4c;
   font-size: 3rem;
-  text-shadow: 7px 7px 2px rgb(3, 3, 3);
+  text-shadow: 3px 3px 0px rgb(3, 3, 3);
   cursor: pointer;
 }
 .clue-content {
   font-family: 'ITC Korinna', serif;
-  font-weight: 700;
   font-size: 4rem;
   text-transform: uppercase;
   letter-spacing: .05em;
-  text-shadow: 3px 3px 2px rgb(3, 3, 3);
+  text-shadow: 3px 3px 0px rgb(3, 3, 3);
 }
 </style>

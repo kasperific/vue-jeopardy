@@ -20,6 +20,7 @@ git commit -m 'deploy'
 # git push -f git@github.com:kasperific/kasperific.github.io.git master
 
 # if you are deploying to https://kasperific.github.io/vue-jeopardy
-git push -f git@github.com:kasperific/vue-jeopardy.git master:gh-pages
-
-cd -
+npm run build
+git add dist -f
+git commit -m "adding dist"
+git subtree push --prefix dist origin gh-pages
